@@ -30,6 +30,12 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL="user_control.CustomUser"
+
+REST_FRAMEWORK ={
+    'EXCEPTION_HANDLER': 'chatapi.custom_methods.custom_exception_handler',
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 20,
+}
 # Application definition
 
 INSTALLED_APPS = [
@@ -126,9 +132,9 @@ USE_TZ = True
 S3_BUCKET_URL = config('S3_BUCKET_URL')
 STATIC_ROOT = 'staticfiles'
 
-AWS_ACCESS_KEY_ID = config('O98B2ZXNNTIRRKH08Z1O')
-AWS_SECRET_ACCESS_KEY = config('z7mz7TQDycdCVqP4PFF99NkOsSsR8ymq19mK6lZm')
-AWS_STORAGE_BUCKET_NAME = config('chatapp')
+AWS_ACCESS_KEY_ID = 'O98B2ZXNNTIRRKH08Z1O'
+AWS_SECRET_ACCESS_KEY = 'z7mz7TQDycdCVqP4PFF99NkOsSsR8ymq19mK6lZm'
+AWS_STORAGE_BUCKET_NAME = 'chatapp'
 AWS_S3_ENDPOINT_URL = 'https://s3.us-east-1.wasabisys.com'
 AWS_S3_CUSTOM_DOMAIN= '%s.s3.us-east-1.wasabisys.com' %AWS_STORAGE_BUCKET_NAME
 AWS_LOCATION = 'static'
@@ -152,6 +158,7 @@ AWS_S3_OBJECT_PARAMETERS = {
 
 
 DEFAULT_FILE_STORAGE = 'chat3.storage_backends.MediaStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # SOCKET_SERVER = config("SOCKET_SERVER")
 # Default primary key field type
