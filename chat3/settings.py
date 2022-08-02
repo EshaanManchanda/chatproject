@@ -50,11 +50,13 @@ INSTALLED_APPS = [
     'user_control',
     'message_control',
     'chat3',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -67,7 +69,9 @@ ROOT_URLCONF = 'chat3.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            # os.path.join(BASE_DIR, 'chatfrontend/build')
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -82,9 +86,30 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'chat3.wsgi.application'
 
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_HEADERS = (
+    'x-requested-with',
+    'content-type',
+    'accept',
+    'origin',
+    'authorization',
+    'accept-encoding',
+    'x-csrftoken',
+    'access-control-allow-origin',
+    'content-disposition'
+)
+CORS_ALLOW_CREDENTIALS = False
+CORS_ALLOW_METHODS = ('GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS')
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+
+
+DB_NAME = config("DB_NAME")
+DB_USER = config("DB_USER")
+DB_PASSWORD = config("DB_PASSWORD")
+DB_HOST = config("DB_HOST")
+DB_PORT = config("DB_PORT")
 
 DATABASES = {
     'default': {
@@ -159,6 +184,7 @@ AWS_S3_OBJECT_PARAMETERS = {
 
 DEFAULT_FILE_STORAGE = 'chat3.storage_backends.MediaStorage'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+SOCKET_SERVER=config('SOCKET_SERVER')
 
 # SOCKET_SERVER = config("SOCKET_SERVER")
 # Default primary key field type

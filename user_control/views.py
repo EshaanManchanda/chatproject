@@ -11,7 +11,7 @@ from .serializers import (LoginSerializer, RegisterSerializer, RefreshSerializer
 from django.contrib.auth import authenticate
 from rest_framework.response import Response
 from .authentication import Authentication
-# from chat3.custom_methods import IsAuthenticatedCustom
+from chat3.custom_methods import IsAuthenticatedCustom
 from rest_framework.viewsets import ModelViewSet
 import re
 from django.db.models import Q, Count, Subquery, OuterRef

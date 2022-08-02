@@ -32,7 +32,7 @@ class GenericFileUploadView(ModelViewSet):
     serializer_class = GenericFileUploadSerializer
 
 
-class MessageView(ModelViewSet):
+class MessageView(ModelViewSet): 
     queryset = Message.objects.select_related(
         "sender", "receiver").prefetch_related("message_attachments")
     serializer_class = MessageSerializer
