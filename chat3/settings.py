@@ -32,9 +32,13 @@ ALLOWED_HOSTS = ['*']
 AUTH_USER_MODEL="user_control.CustomUser"
 
 REST_FRAMEWORK ={
-    'EXCEPTION_HANDLER': 'chatapi.custom_methods.custom_exception_handler',
+    'EXCEPTION_HANDLER': 'chat3.custom_methods.custom_exception_handler',
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 20,
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
 }
 # Application definition
 
@@ -115,6 +119,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        # 'NAME': DB_NAME,
+        # 'USER': DB_USER,
+        # 'PASSWORD': DB_PASSWORD,
+        # 'HOST': DB_HOST,
+        # 'PORT': DB_PORT,
     }
 }
 

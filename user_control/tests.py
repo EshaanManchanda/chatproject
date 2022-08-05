@@ -2,7 +2,7 @@ from rest_framework.test import APITestCase
 from .views import get_random, get_access_token, get_refresh_token
 from .models import CustomUser, UserProfile
 from message_control.tests import create_image, SimpleUploadedFile
-
+import json
 
 class TestGenericFunctions(APITestCase):
 
@@ -219,7 +219,7 @@ class TestUserInfo(APITestCase):
         UserProfile.objects.create(user=user2, first_name="Vester", last_name="Mango",
                                    caption="it's all about testing", about="I'm a youtuber")
 
-        user3 = CustomUser.objects._create_user(
+        user3 = CustomUser.objects.create_user(
             username="vasman", password="vasman123", email="adefemi@yahoo.com2")
         UserProfile.objects.create(user=user3, first_name="Adeyemi", last_name="Boseman",
                                    caption="it's all about testing", about="I'm a youtuber")

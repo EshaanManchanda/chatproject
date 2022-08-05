@@ -66,7 +66,7 @@ class TestMessage(APITestCase):
             'HTTP_AUTHORIZATION': 'Bearer {}'.format(result['access'])}
 
         # receiver
-        self.receiver = CustomUser.objects._create_user(
+        self.receiver = CustomUser.objects.create_user(
             "receiver", "receiver123", email="ade123@yahoo.com")
         UserProfile.objects.create(
             first_name="receiver", last_name="receiver", user=self.receiver, caption="receiver", about="receiver")
